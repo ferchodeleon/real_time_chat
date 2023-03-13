@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Labels extends StatelessWidget {
-  const Labels({super.key, required this.route});
+  const Labels({super.key, required this.route, required this.bottomText});
 
   final String route;
+  final String bottomText;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class Labels extends StatelessWidget {
           GestureDetector(
             onTap: () => Navigator.pushReplacementNamed(context, route),
             child: Text(
-              '¡Crea una ahora!',
+              bottomText,
               style: TextStyle(
                 color: Colors.blue[600],
                 fontSize: 18,
