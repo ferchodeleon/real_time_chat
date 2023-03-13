@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_real_time_chat/widgets/Labels.dart';
 import 'package:flutter_real_time_chat/widgets/Logo.dart';
+import 'package:flutter_real_time_chat/widgets/bottom_blue.dart';
 import 'package:flutter_real_time_chat/widgets/custom_input.dart';
 
 class LoginPage extends StatelessWidget {
@@ -8,10 +9,12 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = ScrollController();
     return Scaffold(
       backgroundColor: const Color(0xfff2f2f2),
       body: SafeArea(
         child: SingleChildScrollView(
+          controller: controller,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
@@ -63,12 +66,9 @@ class __FormState extends State<_Form> {
           ),
           //TODO: Crear botón
 
-          ElevatedButton(
-            onPressed: () {
-              print(emailCtrl.text);
-              print(passCtrl.text);
-            },
-            child: const Text('Ingresar'),
+          BottomBlue(
+            titleButtom: 'Ingrese',
+            onPressed: () {},
           ),
         ],
       ),
