@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_real_time_chat/widgets/Labels.dart';
-import 'package:flutter_real_time_chat/widgets/Logo.dart';
+import 'package:flutter_real_time_chat/widgets/labels.dart';
+import 'package:flutter_real_time_chat/widgets/logo.dart';
 import 'package:flutter_real_time_chat/widgets/bottom_blue.dart';
 import 'package:flutter_real_time_chat/widgets/custom_input.dart';
 
@@ -21,9 +21,11 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Logo(),
+                Logo(
+                  title: 'Live chat',
+                ),
                 _Form(),
-                Labels(route: 'register'),
+                Labels(bottomText: '¡Crea una ahora!', route: 'register'),
                 Text(
                   'Terminos y condiciones de uso',
                   style: TextStyle(fontWeight: FontWeight.w200),
