@@ -13,6 +13,7 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   final _textController = TextEditingController();
   final _focusNode = FocusNode();
+  bool _isReading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +73,13 @@ class _ChatPageState extends State<ChatPage> {
                 controller: _textController,
                 onSubmitted: _handleSumit,
                 onChanged: (String text) {
+                  setState(() {
+                    if (text.trim().isNotEmpty) {
+                      _isReading = true;
+                    } else {
+                      _isReading = false;
+                    }
+                  });
                   //TODO: Cuando hay un valor, para poder postear
                 },
                 decoration:
@@ -82,13 +90,24 @@ class _ChatPageState extends State<ChatPage> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 4.0),
               child: Platform.isIOS
-                  ? CupertinoButton(child: Text('Enviar'), onPressed: () {})
+                  ? CupertinoButton(
+                      onPressed: _isReading
+                          ? () => _handleSumit(_textController.text)
+                          : null,
+                      child: const Text('Enviar'),
+                    )
                   : Container(
                       margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                      child: IconButton(
-                        color: Colors.blue[400],
-                        onPressed: () {},
-                        icon: const Icon(Icons.send),
+                      child: IconTheme(
+                        data: IconThemeData(color: Colors.blue[400]),
+                        child: IconButton(
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
+                          onPressed: _isReading
+                              ? () => _handleSumit(_textController.text)
+                              : null,
+                          icon: const Icon(Icons.send),
+                        ),
                       ),
                     ),
             )
@@ -100,6 +119,9 @@ class _ChatPageState extends State<ChatPage> {
 
   _handleSumit(String texto) {
     print(texto);
+    setState(() {
+      _isReading = false;
+    });
     _textController.clear();
     _focusNode.requestFocus();
   }
