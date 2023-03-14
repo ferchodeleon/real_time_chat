@@ -23,7 +23,11 @@ class RegisterPage extends StatelessWidget {
               children: const [
                 Logo(title: 'Registrarse'),
                 _Form(),
-                Labels(bottomText: 'Login', route: 'login'),
+                Labels(
+                  title: 'Inicia sesión',
+                  subTitle: 'Login',
+                  route: 'login',
+                ),
                 Text(
                   'Terminos y condiciones de uso',
                   style: TextStyle(fontWeight: FontWeight.w200),
@@ -45,6 +49,7 @@ class _Form extends StatefulWidget {
 }
 
 class __FormState extends State<_Form> {
+  final nameCtrl = TextEditingController();
   final emailCtrl = TextEditingController();
   final passCtrl = TextEditingController();
 
@@ -55,6 +60,12 @@ class __FormState extends State<_Form> {
       padding: const EdgeInsets.symmetric(horizontal: 50),
       child: Column(
         children: [
+          CustomInput(
+            icon: Icons.perm_identity,
+            placeHolder: 'Nombre',
+            keyboardType: TextInputType.emailAddress,
+            textController: nameCtrl,
+          ),
           CustomInput(
             icon: Icons.mail_outline,
             placeHolder: 'Correo',

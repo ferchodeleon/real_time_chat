@@ -21,11 +21,13 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Logo(
-                  title: 'Live chat',
-                ),
+                Logo(title: 'Live chat'),
                 _Form(),
-                Labels(bottomText: '¡Crea una ahora!', route: 'register'),
+                Labels(
+                  title: '¿No tienes cuenta?',
+                  subTitle: '¡Crea una ahora!',
+                  route: 'register',
+                ),
                 Text(
                   'Terminos y condiciones de uso',
                   style: TextStyle(fontWeight: FontWeight.w200),
