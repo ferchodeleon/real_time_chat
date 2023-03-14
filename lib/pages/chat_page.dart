@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_real_time_chat/widgets/chat_message.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -13,6 +14,14 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   final _textController = TextEditingController();
   final _focusNode = FocusNode();
+  List<ChatMessage> _messages = [
+    ChatMessage(text: 'Hola mundo', uid: '123'),
+    ChatMessage(text: 'Hola mundo', uid: '123'),
+    ChatMessage(text: 'Hola mundo', uid: '456'),
+    ChatMessage(text: 'Hola mundo', uid: '123'),
+    ChatMessage(text: 'Hola mundo', uid: '456'),
+    ChatMessage(text: 'Hola mundo', uid: '123'),
+  ];
   bool _isReading = false;
 
   @override
@@ -42,7 +51,8 @@ class _ChatPageState extends State<ChatPage> {
           children: [
             Flexible(
               child: ListView.builder(
-                itemBuilder: (_, i) => Text('$i'),
+                itemCount: _messages.length,
+                itemBuilder: (_, i) => _messages[i],
                 physics: const BouncingScrollPhysics(),
                 reverse: true,
               ),
@@ -83,7 +93,7 @@ class _ChatPageState extends State<ChatPage> {
                   //TODO: Cuando hay un valor, para poder postear
                 },
                 decoration:
-                    InputDecoration.collapsed(hintText: 'Enviar mensaje'),
+                    const InputDecoration.collapsed(hintText: 'Enviar mensaje'),
                 focusNode: _focusNode,
               ),
             ),
@@ -119,10 +129,12 @@ class _ChatPageState extends State<ChatPage> {
 
   _handleSumit(String texto) {
     print(texto);
+    _textController.clear();
+    _focusNode.requestFocus();
+    final newMessage = ChatMessage(text: texto, uid: '123');
+    _messages.insert(0, newMessage);
     setState(() {
       _isReading = false;
     });
-    _textController.clear();
-    _focusNode.requestFocus();
   }
 }
